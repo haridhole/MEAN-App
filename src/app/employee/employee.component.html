@@ -1,0 +1,69 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+<form class="form-horizontal" #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+    
+    
+    <div class="form-group">
+                <input type="hidden" #_id="ngModel" name="_id" [(ngModel)]="employeeService.selectedEmployee._id"> 
+      </div>
+      
+    
+    <div class="form-group">
+      <label class="col-sm-2">Name:</label>
+      <input type="text" #name="ngModel" name="name" [(ngModel)]="employeeService.selectedEmployee.name"> 
+    </div>
+    
+    <div class="form-group">
+        <label class="col-sm-2">Position:</label>
+        <input type="text" #position="ngModel" name="position" [(ngModel)]="employeeService.selectedEmployee.position"> 
+      </div>
+    
+      <div class="form-group">
+        <label class="col-sm-2">Office:</label>
+        <input type="text" #office="ngModel" name="office" [(ngModel)]="employeeService.selectedEmployee.office"> 
+      </div>
+    
+      <div class="form-group">
+        <label class="col-sm-2">Salary:</label>
+        <input type="text" #salary="ngModel" name="salary" [(ngModel)]="employeeService.selectedEmployee.salary"> 
+      </div>
+      <button type="button" class="btn btn-custom" (click)="resetForm(employeeForm)">Reset</button>
+    <button type="submit" class="btn btn-custom">Submit</button>
+  </form>
+
+<br>
+<br>
+<h4>List Of Employees</h4>
+
+<table class="table-responsive table-bordered" >
+<thead>
+<th>ID</th>
+<th>NAME</th>
+<th>POSITION</th>
+<th>OFFICE</th>
+<th>SALARY</th>
+</thead>
+
+
+<tbody>
+<tr *ngFor="let emp of employeeService.employees">
+<td> {{emp._id}}</td>
+<td>{{emp.name}}</td>
+<td>{{emp.position}}</td>
+<td>{{emp.office}}</td>
+<td>{{emp.salary}}</td>
+
+<td>
+  
+  <button (click)='editEmployee(emp)'> Edit </button>
+
+<button (click)='deleteEmployee(emp._id,employeeForm)'> Delete </button>
+
+</td>
+
+</tr>
+
+</tbody>
+</table>
